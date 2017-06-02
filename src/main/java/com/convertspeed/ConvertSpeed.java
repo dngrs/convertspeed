@@ -48,17 +48,6 @@ public class ConvertSpeed {
      * Gets the value of the speed property.
      * 
      */
-    public double getSpeed() {
-        return speed;
-    }
-
-    /**
-     * Sets the value of the speed property.
-     * 
-     */
-    public void setSpeed(double value) {
-        this.speed = value;
-    }
 
     /**
      * Gets the value of the fromUnit property.

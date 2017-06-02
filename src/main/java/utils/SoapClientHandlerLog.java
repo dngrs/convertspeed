@@ -11,6 +11,7 @@ import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.util.Set;
 
 
@@ -18,7 +19,7 @@ import java.util.Set;
  * Created by Igor Odokienko
  */
 public class SoapClientHandlerLog implements SOAPHandler<SOAPMessageContext> {
-    private static final Logger LOG = LogManager.getLogger(SoapClientHandlerLog.class);
+    private static final Logger LOG = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
     ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -56,6 +57,7 @@ public class SoapClientHandlerLog implements SOAPHandler<SOAPMessageContext> {
     @Override
     public boolean handleFault(SOAPMessageContext context) {
         SOAPMessage message = context.getMessage();
+        String str = "";
 
         try {
 
@@ -64,10 +66,13 @@ public class SoapClientHandlerLog implements SOAPHandler<SOAPMessageContext> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            LOG.error(new String(out.toByteArray()));
+            //LOG.error(new String(out.toByteArray()));
         } catch (SOAPException e) {
             e.printStackTrace();
         }
+        str = str + XmlFormatter.prettyPrint(new String(out.toByteArray()));
+        LOG.error(str);
+        out.reset();
         return true;
     }
 

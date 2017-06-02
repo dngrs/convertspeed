@@ -69,4 +69,14 @@ public class ConvertSpeedNegativeTest extends BaseTest {
         }
     }
 
+    @Test(expected = SOAPFaultException.class)
+    public void checkInjectionOfSpeedParameterAsString() {
+        try {
+            convertSpeedsSoap.convertSpeed("100", SpeedUnit.KILOMETERS_PERHOUR, SpeedUnit.MILES_PERHOUR);
+        } catch (SOAPFaultException e) {
+            Assert.assertTrue(e.getMessage().contains("'qwe' is not a valid value for Speed parameter"));
+            throw e;
+        }
+    }
+
 }

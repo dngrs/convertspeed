@@ -51,4 +51,17 @@ public interface ConvertSpeedsSoap {
             @WebParam(name = "ToUnit", targetNamespace = "http://www.webserviceX.NET/")
                     SpeedUnit toUnit);
 
+    //Overloaded method to test injections
+    @WebMethod(operationName = "ConvertSpeed", action = "http://www.webserviceX.NET/ConvertSpeed")
+    @WebResult(name = "ConvertSpeedResult", targetNamespace = "http://www.webserviceX.NET/")
+    @RequestWrapper(localName = "ConvertSpeedExt", targetNamespace = "http://www.webserviceX.NET/", className = "com.convertspeed.ConvertSpeedExt")
+    @ResponseWrapper(localName = "ConvertSpeedResponse", targetNamespace = "http://www.webserviceX.NET/", className = "com.convertspeed.ConvertSpeedResponse")
+    public double convertSpeed(
+            @WebParam(name = "speed", targetNamespace = "http://www.webserviceX.NET/")
+                    String speed,
+            @WebParam(name = "FromUnit", targetNamespace = "http://www.webserviceX.NET/")
+                    SpeedUnit fromUnit,
+            @WebParam(name = "ToUnit", targetNamespace = "http://www.webserviceX.NET/")
+                    SpeedUnit toUnit);
+
 }
