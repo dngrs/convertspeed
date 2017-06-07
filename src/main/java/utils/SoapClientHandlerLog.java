@@ -60,7 +60,6 @@ public class SoapClientHandlerLog implements SOAPHandler<SOAPMessageContext> {
         String str = "";
 
         try {
-
             try {
                 message.writeTo(out);
             } catch (IOException e) {
